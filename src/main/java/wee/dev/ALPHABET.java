@@ -242,7 +242,7 @@ public class ALPHABET {
         for (char c : text.toUpperCase().toCharArray()) {
             lettersInAsci.add(getLetter(c));
         }
-        // split it to lines, each line is 24 characters long
+        // split it to lines, each line is 24 characters long (it starts with space, and ends with space so it's 26)
         ArrayList<ArrayList<String[][]>> lines = new ArrayList<>();
         ArrayList<String[][]> currentLine = new ArrayList<>();
 
@@ -251,27 +251,17 @@ public class ALPHABET {
         for (String[][] letter : lettersInAsci) {
             int width = letter[0].length;
             if (totalAdded + width > 26) {
-                // add the current line to the lines
                 lines.add(currentLine);
-                // check how many lines haven't reached 26 characters, and fill them with spaces till they reach 24
-                // create a new line
                 currentLine = new ArrayList<>();
                 totalAdded = 2;
                 currentLine.add(SPACE);
-
             }
             currentLine.add(letter);
             currentLine.add(SPACE);
             totalAdded += width + 1;
         }
 
-        // check how many lines haven't reached 26 characters, and fill them with spaces till they reach 24
-//        if (totalAdded < 26) {
-//            int remaining = 26 - totalAdded;
-//            for (int i = 0; i <= remaining; i++) {
-//                currentLine.add(SPACE);
-//            }
-//        }
+
         lines.add(currentLine);
 
         // convert the lines to a string
